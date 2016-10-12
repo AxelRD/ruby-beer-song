@@ -1,4 +1,13 @@
 class BeerSong
+
+  def verses(first,last)
+    song = []
+    (last..first).to_a.reverse.each do |verse_num|
+      song << verse(verse_num)
+    end
+    song.join("\n")
+  end
+
   def verse(verse_number)
     <<-VERSE
 #{nombre_de_conteneurs(verse_number).capitalize} #{conteneur(verse_number)} of beer on the wall, #{nombre_de_conteneurs(verse_number)} #{conteneur(verse_number)} of beer.
@@ -7,11 +16,7 @@ VERSE
   end
 
   def how_many_on_the_wall(verse_number)
-    if verse_number == 2 || verse_number == 0
-      "#{take_it_or_go_to_the_store(verse_number)} #{how_many_left(verse_number)} #{conteneur(how_many_left(verse_number))} of beer on the wall."
-    else
-      "#{take_it_or_go_to_the_store(verse_number)} #{nombre_de_conteneurs(how_many_left(verse_number))} #{conteneur(how_many_left(verse_number))} of beer on the wall."
-    end
+    "#{take_it_or_go_to_the_store(verse_number)} #{how_many_left(verse_number)} #{conteneur(how_many_left(verse_number))} of beer on the wall."
   end
 
   def take_it_or_go_to_the_store(verse_number)
@@ -41,6 +46,7 @@ VERSE
 
   def how_many_left(verse_number)
     return 99 if verse_number == 0
+    return 'no more' if verse_number == 1
     (verse_number - 1)
   end
 
