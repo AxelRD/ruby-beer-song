@@ -6,6 +6,20 @@ class BeerSong
 VERSE
   end
 
+  def how_many_on_the_wall(verse_number)
+    if verse_number == 2 || verse_number == 0
+      "#{take_it_or_go_to_the_store(verse_number)} #{how_many_left(verse_number)} #{conteneur(how_many_left(verse_number))} of beer on the wall."
+    else
+      "#{take_it_or_go_to_the_store(verse_number)} #{nombre_de_conteneurs(how_many_left(verse_number))} #{conteneur(how_many_left(verse_number))} of beer on the wall."
+    end
+  end
+
+  def take_it_or_go_to_the_store(verse_number)
+    return 'Go to the store and buy some more,' if verse_number == 0
+    return 'Take it down and pass it around,' if verse_number == 1
+    'Take one down and pass it around,'
+  end
+
   def conteneur(number)
     case number
     when 1
@@ -20,15 +34,14 @@ VERSE
     number.to_s
   end
 
-  def how_many_on_the_wall(verse_number)
-    if verse_number > 2
-      "Take one down and pass it around, #{verse_number - 1} #{conteneur(verse_number - 1)} of beer on the wall."
-    elsif verse_number == 1
-      "Take it down and pass it around, no more bottles of beer on the wall."
-    elsif verse_number == 0
-      "Go to the store and buy some more, 99 bottles of beer on the wall."
-    else
-      "Take one down and pass it around, 1 #{conteneur(verse_number - 1)} of beer on the wall."
-    end
+  def supprime_conteneur(verse_number)
+    return 'one' if verse_number > 2
+    'it'
   end
+
+  def how_many_left(verse_number)
+    return 99 if verse_number == 0
+    (verse_number - 1)
+  end
+
 end
